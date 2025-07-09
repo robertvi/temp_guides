@@ -1,2 +1,2 @@
 # temp_guides
-Temporary guides
+Temporary guides repository
