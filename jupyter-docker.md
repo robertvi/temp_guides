@@ -1,7 +1,7 @@
 # Docker Jupyter
 
 ## Using a custom image
-Create a file called `Dockerfile` using a text editor such as [VSCode](https://code.visualstudio.com/) containing the following and save it into a new empty folder:
+On your local machine create a file called `Dockerfile` using a text editor such as [VSCode](https://code.visualstudio.com/) containing the following and save it into a new empty folder:
 
 ```Dockerfile
 FROM quay.io/jupyter/minimal-notebook:2025-03-14
