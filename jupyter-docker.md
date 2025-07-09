@@ -10,7 +10,7 @@ RUN rmdir /home/jovyan/work
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
 ```
 
-Edit the list of conda packages to include everything you need.
+Edit the list of conda packages to include everything you need. Note the `rmdir /home/jovyan/work` command above removes a folder from the container so that you don't accidentally sve anything important there, as it will get deleted when the container stops running as we are using the `--rm` option with docker run below.
 
 Now open Powershell or a terminal into the same folder as the Dockerfile and build the docker image using:
 ```bash
