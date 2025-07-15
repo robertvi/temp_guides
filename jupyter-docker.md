@@ -43,4 +43,4 @@ docker run -it --rm \
   my-jupyter-lab
 ```
 
-When the container starts running it will show some links. Open Firefox ('Activities', then Search 'Firefox'), navigate to the link that looks something like `http://localhost:8888/lab?token=...` or `http://127.0.0.1:8888/lab?token=...`.
+When the container starts running it will show some links. Open Firefox ('Activities', then Search 'Firefox') and navigate to the link that looks something like `http://localhost:8888/lab?token=...` or `http://127.0.0.1:8888/lab?token=...`.
