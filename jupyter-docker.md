@@ -31,7 +31,7 @@ docker load -i ~/shared/inbound/$(whoami)/my-jupyter-lab.tar
 
 You now launch the container mounting whichever folder(s) you will need to access. To be able to see them from within jupyterlab you must tell docker to mount them inside the container under the default home folder of the container which is called `/home/jovyan` regardless of what your TRE username is. So to have access to the TRE folder `/shared` we can mount it as `/home/jovyan/shared` within the container. If you also need access to your home folder you can mount TRE folder `/home/$(whoami)` as `/home/jovyan/home` within the container. It makes no difference which folder you run the docker run command from provided you specify the mounts as shown below using absolute paths.
 
-Everything you work on from within jupyter that you need to keep must be saved to somewhere in the shared folder(s) you have mounted. Anything else will be lost when the container stops running as we will be launching the container in throw away mode (`--rm` below), i.e. it will not save anything you modify within the container itself. This avoids creating a new container image on disk every time you launch it:
+Everything you work on from within jupyter that you need to keep must be saved to somewhere in the folder(s) you have mounted. Anything else will be lost when the container stops running as we will be launching the container in throw away mode (`--rm` below), i.e. it will not save anything you modify within the container itself. This avoids creating a new container image on disk every time you launch it:
 
 ```bash
 docker run -it --rm \
@@ -43,4 +43,4 @@ docker run -it --rm \
   my-jupyter-lab
 ```
 
-Finally, open the link shown in the TRE desktop browser to access Jupyter Lab. Open Firefox ('Activities', then Search 'Firefox'), navigate to the URL that's displayed in the previous command (something like `http://localhost:8888/lab?token=...`).
+When the container starts running it will show some links. Open Firefox ('Activities', then Search 'Firefox'), navigate to the link that looks something like `http://localhost:8888/lab?token=...` or `http://127.0.0.1:8888/lab?token=...`.
