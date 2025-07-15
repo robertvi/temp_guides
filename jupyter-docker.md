@@ -26,7 +26,7 @@ Ingress the `my-jupyter-lab.tar` file into the TRE using the Airlock.
 
 Then from your TRE desktop load the image:
 ```bash
-docker load -i ~/shared/inbound/$(whoami)/my-jupyter-lab.tar
+docker load -i /shared/inbound/$(whoami)/my-jupyter-lab.tar
 ```
 
 You now launch the container mounting whichever folder(s) you will need to access. To be able to see them from within jupyterlab you must tell docker to mount them inside the container under the default home folder of the container which is called `/home/jovyan` regardless of what your TRE username is. So to have access to the TRE folder `/shared` we can mount it as `/home/jovyan/shared` within the container. If you also need access to your home folder you can mount TRE folder `/home/$(whoami)` as `/home/jovyan/home` within the container. It makes no difference which folder you run the docker run command from provided you specify the mounts as shown below using absolute paths.
@@ -44,3 +44,5 @@ docker run -it --rm \
 ```
 
 When the container starts running it will show some links. Open Firefox ('Activities', then Search 'Firefox') and navigate to the link that looks something like `http://localhost:8888/lab?token=...` or `http://127.0.0.1:8888/lab?token=...`.
+
+Once done using it, the container can be stopped by going to the terminal window you started it from and hitting `CTRL-C`.
