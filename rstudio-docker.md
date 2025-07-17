@@ -73,15 +73,14 @@ Run the container using the following command which will mount your home and sha
 ```bash
 docker run -it --rm \
   -e PASSWORD=rstudio \
-  -v /shared:/home/rstudio/shared \
-  -v /home/$(whoami):/home/rstudio/home \
+  -v /shared:/root/shared \
+  -v /home/$(whoami):/root/home \
   -p 8787:8787 \
-  --userns=keep-id:uid=1000,gid=100 \
   --security-opt=label=disable \
   my-rstudio
 ```
 
-You may want to change the password from `rstudio`, although you should be the only user able to access RStudio running on your TRE desktop due to the lack of any internet connection. If you remove `-e PASSWORD=rstudio` altogether it will set a different random password each time you launch the container.
+The TRE uses [podman](https://podman.io/) to implement docker which is why the mount options are a little different. Log in as user `root` with password `rstudio`. You may want to change the password to something more secure, although you should be the only user able to access RStudio running on your TRE desktop due to the lack of any internet connection. If you remove `-e PASSWORD=rstudio` altogether it will set a different random password each time you launch the container.
 
 Open Firefox ('Activities', then Search 'Firefox') and navigate to `http://localhost:8787`, enter `rstudio` as the username and the password you chose. You should now be able to access all your data and scripts on `/home` and `/shared` from within RStudio and have all the packages you installed.
 
