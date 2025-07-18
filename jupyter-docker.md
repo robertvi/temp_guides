@@ -1,6 +1,9 @@
 # Docker Jupyter
+This guide explains how to build a Jupyter Lab / Notebook docker container. We assume you have already installed [Docker Desktop](https://www.docker.com/products/docker-desktop/) on your local computer and are familiar with running basic commands in Powershell or a terminal, and with creating and editing small script files using a programmer's text editor such as [VSCode](https://code.visualstudio.com/).
 
-## Using a custom image
+## Creating a JupyterLab image with custom conda packages
+Here we use numpy, pandas and matplotlib as examples packages to add to your docker image, but you can change these to any conda package(s) you require.
+
 On your local machine create a file called `Dockerfile` using a text editor such as [VSCode](https://code.visualstudio.com/) containing the following and save it into a new empty folder:
 
 ```Dockerfile
