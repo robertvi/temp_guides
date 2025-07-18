@@ -20,6 +20,28 @@ Now open Powershell or a terminal into the same folder as the Dockerfile and bui
 docker build -t my-jupyter-lab .
 ```
 
+## Test all your modules import correctly
+Optionally, but high recommended, here we run the container locally and do a test import of all the python modules before uploading to the TRE, as we can fix any missing packages only when we have an internet connection. Launch the container into an interactive python prompt:
+
+```bash
+docker run --rm -it my-jupyter python3
+```
+
+When the python prompt appears we import all the custom packages you added to the container (in this example numpy, pandas and matplotlib):
+
+```python
+import numpy
+import pandas
+import matplotlib
+exit()
+```
+
+Any missing python modules will cause an import error. Use the error message to work out which additional conda packages are required, add them to your Docker file and repeat the build and test process until you can import everything successfully.
+
+
+
+## Move the container into the TRE
+
 Save the image to a tar file:
 ```bash
 docker save -o my-jupyter-lab.tar my-jupyter-lab
