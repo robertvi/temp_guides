@@ -17,7 +17,7 @@ Edit the list of conda packages to include everything you need. Note the `rmdir 
 
 Now open Powershell or a terminal into the same folder as the Dockerfile and build the docker image using:
 ```bash
-docker build -t my-jupyter-lab .
+docker build -t my-jupyter .
 ```
 
 ## Test all your modules import correctly
@@ -51,14 +51,14 @@ Once it launches it should print a message giving you the URL you need to open i
 
 Save the image to a tar file:
 ```bash
-docker save -o my-jupyter-lab.tar my-jupyter-lab
+docker save -o my-jupyter.tar my-jupyter
 ```
 
-Ingress the `my-jupyter-lab.tar` file into the TRE using the Airlock.
+Ingress the `my-jupyter.tar` file into the TRE using the Airlock.
 
 Then from your TRE desktop load the image:
 ```bash
-docker load -i /shared/inbound/$(whoami)/my-jupyter-lab.tar
+docker load -i /shared/inbound/$(whoami)/my-jupyter.tar
 ```
 
 You now launch the container mounting whichever folder(s) you will need to access. To be able to see them from within jupyterlab you must tell docker to mount them inside the container under the default home folder of the container which is called `/home/jovyan` regardless of what your TRE username is. So to have access to the TRE folder `/shared` we can mount it as `/home/jovyan/shared` within the container. If you also need access to your home folder you can mount TRE folder `/home/$(whoami)` as `/home/jovyan/home` within the container. It makes no difference which folder you run the docker run command from provided you specify the mounts as shown below using absolute paths.
@@ -72,7 +72,7 @@ docker run -it --rm \
   -p 8888:8888 \
   --userns=keep-id:uid=1000,gid=100 \
   --security-opt=label=disable \
-  my-jupyter-lab
+  my-jupyter
 ```
 
 When the container starts running it will show some links. Open Firefox ('Activities', then Search 'Firefox') and navigate to the link that looks something like `http://localhost:8888/lab?token=...` or `http://127.0.0.1:8888/lab?token=...`.
