@@ -38,7 +38,14 @@ exit()
 
 Any missing python modules will cause an import error. Use the error message to work out which additional conda packages are required, add them to your Docker file and repeat the build and test process until you can import everything successfully.
 
+## Test using jupyter lab itself
+Alternatively or additionally you may want to run tests inside jupyterlab itself on your local machine. Here we mount your current folder into the container so that any test scripts or data there can be accessed from within jupyterlab using the following command in Powershell or the terminal:
 
+```bash
+docker run --rm -p 8888:8888 -v .:/home/jovyan/shared my-jupyter
+```
+
+Once it launches it should print a message giving you the URL you need to open in your browser in order to access jupyter lab, it should look something like `http://127.0.0.1:8888/lab?token=...`. Once you are finished testing jupyterlab type `CTRL+C` into the window you used to launch the docker command from.
 
 ## Move the container into the TRE
 
