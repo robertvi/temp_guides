@@ -71,16 +71,10 @@ docker load -i /shared/inbound/$(whoami)/my-rstudio.tar
 Run the container using the following command which will mount your home and shared folders so they appear under the home folder within the container. Be sure to save anything you need to keep under one of these folders as everything else in the container will be deleted once it stops running. Note also that the container is working directly with your data in the shared folders, not a temporary copy of them, so use all the normal precautions when working with important files.
 
 ```bash
-docker run -it --rm \
-  -e PASSWORD=rstudio \
-  -v /shared:/root/shared \
-  -v /home/$(whoami):/root/home \
-  -p 8787:8787 \
-  --security-opt=label=disable \
-  my-rstudio
+docker run -it --rm -e PASSWORD=rstudio -v /shared:/root/shared -v /home/$(whoami):/root/home -p 8787:8787 --security-opt=label=disable my-rstudio
 ```
 
-The TRE uses [podman](https://podman.io/) to run docker containers which is why the mount options are a little different. You may want to change the password to something more secure then `rstudio`, although you should be the only user able to access RStudio running on your TRE desktop due to the lack of any internet connection. If you remove `-e PASSWORD=rstudio` altogether it will set a different random password each time you launch the container.
+The TRE uses [podman](https://podman.io/) to run docker containers which is why the mount options are a little different. You may want to change the password to something more secure than `rstudio`, although you should be the only user able to access RStudio running on your TRE desktop due to the lack of any internet connection. If you remove `-e PASSWORD=rstudio` altogether it will set a different random password each time you launch the container.
 
 Open Firefox ('Activities', then Search 'Firefox') and navigate to `http://localhost:8787`, enter `root` as the username and `rstudio` as the password or whichever alternative you chose. You should now be able to access all your data and scripts on `/home` and `/shared` from within RStudio and have all the packages you installed.
 

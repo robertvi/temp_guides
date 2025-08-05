@@ -1,8 +1,8 @@
 # Docker Jupyter
-This guide explains how to build a Jupyter Lab / Notebook docker container. We assume you have already installed [Docker Desktop](https://www.docker.com/products/docker-desktop/) on your local computer and are familiar with running basic commands in Powershell or a terminal, and with creating and editing small script files using a programmer's text editor such as [VSCode](https://code.visualstudio.com/).
+This guide explains how to build a JupyterLab docker container. We assume you have already installed [Docker Desktop](https://www.docker.com/products/docker-desktop/) on your local computer and are familiar with running basic commands in Powershell or a terminal, and with creating and editing small script files using a programmer's text editor such as [VSCode](https://code.visualstudio.com/).
 
 ## Creating a JupyterLab image with custom conda packages
-Here we use numpy, pandas and matplotlib as examples packages to add to your docker image, but you can change these to any conda package(s) you require.
+Here we use numpy, pandas and matplotlib as examples packages to add to your docker image, but you can change these to any conda package(s) you require. The base image is provided by [Docker Stacks](https://github.com/jupyter/docker-stacks) ([documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html)).
 
 On your local machine create a file called `Dockerfile` using a text editor such as [VSCode](https://code.visualstudio.com/) containing the following and save it into a new empty folder:
 
@@ -38,14 +38,14 @@ exit()
 
 Any missing python modules will cause an import error. Use the error message to work out which additional conda packages are required, add them to your Docker file and repeat the build and test process until you can import everything successfully.
 
-## Test using jupyter lab itself
-Alternatively or additionally you may want to run tests inside jupyterlab itself on your local machine. Here we mount your current folder into the container so that any test scripts or data there can be accessed from within jupyterlab using the following command in Powershell or the terminal:
+## Test using JupyterLab itself
+Alternatively or additionally you may want to run tests inside JupyterLab itself on your local machine. Here we mount your current folder into the container so that any test scripts or data there can be accessed from within JupyterLab using the following command in Powershell or the terminal:
 
 ```bash
 docker run --rm -p 8888:8888 -v .:/home/jovyan/shared my-jupyter
 ```
 
-Once it launches it should print a message giving you the URL you need to open in your browser in order to access jupyter lab, it should look something like `http://127.0.0.1:8888/lab?token=...`. Once you are finished testing jupyterlab type `CTRL+C` into the window you used to launch the docker command from.
+Once it launches it should print a message giving you the URL you need to open in your browser in order to access JupyterLab, it should look something like `http://127.0.0.1:8888/lab?token=...`. Once you are finished testing JupyterLab type `CTRL+C` into the window you used to launch the docker command from.
 
 ## Move the container into the TRE
 
@@ -61,9 +61,9 @@ Then from your TRE desktop load the image:
 docker load -i /shared/inbound/$(whoami)/my-jupyter.tar
 ```
 
-You now launch the container mounting whichever folder(s) you will need to access. To be able to see them from within jupyterlab you must tell docker to mount them inside the container under the default home folder of the container which is called `/home/jovyan` regardless of what your TRE username is. So to have access to the TRE folder `/shared` we can mount it as `/home/jovyan/shared` within the container. If you also need access to your home folder you can mount TRE folder `/home/$(whoami)` as `/home/jovyan/home` within the container. It makes no difference which folder you run the docker run command from provided you specify the mounts as shown below using absolute paths.
+You now launch the container mounting whichever folder(s) you will need to access. To be able to see them from within JupyterLab you must tell docker to mount them inside the container under the default home folder of the container which is called `/home/jovyan` regardless of what your TRE username is. So to have access to the TRE folder `/shared` we can mount it as `/home/jovyan/shared` within the container. If you also need access to your home folder you can mount TRE folder `/home/$(whoami)` as `/home/jovyan/home` within the container. It makes no difference which folder you run the docker run command from provided you specify the mounts as shown below using absolute paths.
 
-Everything you work on from within jupyter that you need to keep must be saved to somewhere in the folder(s) you have mounted. Anything else will be lost when the container stops running as we will be launching the container in throw away mode (`--rm` below), i.e. it will not save anything you modify within the container itself. This avoids creating a new container image on disk every time you launch it:
+Everything you work on from within JupyterLab that you need to keep must be saved to somewhere in the folder(s) you have mounted. Anything else will be lost when the container stops running as we will be launching the container in throw away mode (`--rm` below), i.e. it will not save anything you modify within the container itself. This avoids creating a new container image on disk every time you launch it:
 
 ```bash
 docker run -it --rm \
