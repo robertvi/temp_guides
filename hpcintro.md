@@ -1,4 +1,5 @@
 # https://github.com/robertvi/temp_guides
+# https://github-pages.arc.ucl.ac.uk/hpc-intro/
 # prerequites
 - myriad account https://www.rc.ucl.ac.uk/docs/Clusters/Myriad/
 - gitbash   https://gitforwindows.org/
