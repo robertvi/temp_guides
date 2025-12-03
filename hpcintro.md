@@ -2,7 +2,7 @@
 # https://github-pages.arc.ucl.ac.uk/hpc-intro/
 # prerequisites
 - myriad account https://www.rc.ucl.ac.uk/docs/Clusters/Myriad/
-- gitbash   https://gitforwindows.org/
+- gitbash   https://gitforwindows.org/ (for windows users)
 - cyberduck https://cyberduck.io/
 - vscode    https://code.visualstudio.com/download
 
@@ -32,6 +32,7 @@ ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519_myriad
 ```
 
 # copy key to myriad
+On Mac you may have to install this tool using `brew install openssh`
 ```
 ssh-copy-id -i ~/.ssh/id_ed25519_myriad.pub myriad
 ```
