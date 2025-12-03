@@ -190,24 +190,37 @@ samtools view output.bam | less -S
 ```
 
 # python script hello world
-Create a simple python job script
+Create a simple python script
+
 ```
 nano python_hello.py
 ```
+
 Enter the following
 ```
-#!/usr/bin/env python
+print("Hello world!\n")
+```
+
+Create a bash wrapper script
+```
+nano python_hello.sh
+```
+Enter the following
+```
+#!/bin/bash
 #$ -cwd
-#$ -V
-#$ -pe smp 11
+#$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l mem=4G
 
-print("Hello world!")
+module load python3/3.11
+
+python python_hello.py
 ```
 
-Load the module for python3.11 before submitting the job
+Submit the job
 ```
-module load python3/3.11
-qsub python_hello.py
+qsub python_hello.sh
 ```
+
+
