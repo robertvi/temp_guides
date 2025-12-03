@@ -223,4 +223,13 @@ Submit the job
 qsub python_hello.sh
 ```
 
+# alternative download links
+assembly
+https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000010245.2/
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/010/245/GCF_000010245.2_ASM1024v1/GCF_000010245.2_ASM1024v1_genomic.fna.gz
+
+paired end seq data
+https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR31145988&display=metadata
+FASTA/FASTQ download tab
+download FASTQ
 
